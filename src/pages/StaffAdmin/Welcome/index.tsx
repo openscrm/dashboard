@@ -2,32 +2,20 @@ import React, {useEffect, useRef, useState} from 'react';
 import ProCard, {StatisticCard} from '@ant-design/pro-card';
 import RcResizeObserver from 'rc-resize-observer';
 import styles from './index.less';
-import type {
-  FormInstance} from 'antd';
-import {
-  Alert,
-  Button, Col,
-  DatePicker,
-  Divider,
-  Form,
-  message,
-  Popover,
-  Radio, Row,
-  Select,
-  Typography,
-} from 'antd';
+import type {FormInstance} from 'antd';
+import {Button, Col, DatePicker, Divider, Form, message, Radio, Row, Select, Typography,} from 'antd';
 import {connect, history} from 'umi';
 import type {StaffAdminInterface} from '@/services/staffAdmin';
 import type {ConnectProps} from '@@/plugin-dva/connect';
 import type {ConnectState} from '@/models/connect';
 import {Area} from '@ant-design/charts';
 import type {AreaConfig} from '@ant-design/charts/es/plots/area';
-import type { GetTrendParams, SummaryResult, TrendItem} from '@/pages/StaffAdmin/Welcome/service';
+import type {GetTrendParams, SummaryResult, TrendItem} from '@/pages/StaffAdmin/Welcome/service';
 import {GetSummary, GetTrend} from '@/pages/StaffAdmin/Welcome/service';
 import type {CommonResp} from '@/services/common';
 import StaffTreeSelect from '@/pages/StaffAdmin/Components/Fields/StaffTreeSelect';
 import type {StaffOption} from '@/pages/StaffAdmin/Components/Modals/StaffTreeSelectionModal';
-import type { SimpleStaffInterface} from '@/services/staff';
+import type {SimpleStaffInterface} from '@/services/staff';
 import {QuerySimpleStaffs} from '@/services/staff';
 import moment from 'moment';
 import QrcodeImage from '../../../assets/qrcode.png';
@@ -208,20 +196,6 @@ const Welcome: React.FC<WelcomeProps> = (props) => {
         }}
       >
         <ProCard direction={'column'} ghost={true} gutter={8} className={styles.welcomeContainer}>
-          <Alert
-            type={'error'}
-            showIcon={true}
-            closable={true}
-            message={
-              <Typography.Text>本系统仅供学习和研究，
-                <Popover trigger={['click']} content={<img src={QrcodeImage} width={96}/>}>
-                  <strong style={{cursor: 'pointer'}}>商用请购买授权</strong>
-                </Popover>
-              </Typography.Text>
-            }
-            style={{marginBottom: 12}}
-          />
-
           <ProCard.Group ghost={true} wrap={!showSidebar} gutter={8} direction={isSmallScreen ? 'column' : 'row'}>
             <ProCard ghost={true} wrap={!showSidebar} gutter={8} direction={isSmallScreen ? 'column' : 'row'}>
               <ProCard ghost={true}>

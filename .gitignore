@@ -38,6 +38,5 @@ screenshot
 .eslintcache
 
 build
-config/proxy.ts
 
 scripts/deploy*
