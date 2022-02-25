@@ -33,12 +33,12 @@ import _ from "lodash";
 import type {StaffOption} from "@/pages/StaffAdmin/Components/Modals/StaffTreeSelectionModal";
 import type {SimpleStaffInterface} from "@/services/staff";
 import {QuerySimpleStaffs} from "@/services/staff";
-import TableInput from "@/pages/StaffAdmin/Customer/components/TableInput";
+import TableInput from "@/pages/StaffAdmin/Customer/Components/TableInput";
 import type {CustomerTag, CustomerTagGroupItem} from '@/pages/StaffAdmin/CustomerTag/data';
 import CustomerTagSelectionModal from "@/pages/StaffAdmin/Components/Modals/CustomerTagSelectionModal";
 import {QueryCustomerTagGroups} from "@/services/customer_tag_group";
-import InternalTagModal from "@/pages/StaffAdmin/Customer/components/InternalTagModal";
-import Events from './components/Events'
+import InternalTagModal from "@/pages/StaffAdmin/Customer/Components/InternalTagModal";
+import Events from './Components/Events'
 import {CustomerEvents, InternalTags} from "@/pages/StaffAdmin/Customer/data";
 
 export const basicInfo = {
