@@ -90,17 +90,17 @@ export default [
                   },
                   {
                     path: '/staff-admin/customer-growth/contact-way/create',
-                    component: './StaffAdmin/contactWay/create',
+                    component: './StaffAdmin/ContactWay/create',
                     authority: [BizContactWay_Full, BizContactWay_Read],
                   },
                   {
                     path: '/staff-admin/customer-growth/contact-way/edit',
-                    component: './StaffAdmin/contactWay/edit',
+                    component: './StaffAdmin/ContactWay/edit',
                     authority: [BizContactWay_Full, BizContactWay_Read],
                   },
                   {
                     path: '/staff-admin/customer-growth/contact-way/copy',
-                    component: './StaffAdmin/contactWay/copy',
+                    component: './StaffAdmin/ContactWay/copy',
                     authority: [BizContactWay_Full, BizContactWay_Read],
                   },
                   {
