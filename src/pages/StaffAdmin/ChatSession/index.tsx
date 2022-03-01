@@ -54,7 +54,7 @@ const StaffSession: React.FC = (props: any) => {
       QueryStaffsList({
         page_size: 5000,
         enable_msg_arch: 1,
-        ext_department_id: departmentIds || 0,
+        ext_department_ids: departmentIds || 0,
         name: staffName
       }).then(res => {
         if (res?.code === 0) {

@@ -180,7 +180,7 @@ const StaffList: React.FC = () => {
           </div>
         )}
         params={{
-          ext_department_id: currentDepartment !== '0' ? currentDepartment : '0',
+          ext_department_ids: currentDepartment !== '0' ? currentDepartment : '0',
         }}
         request={async (params, sort, filter) => {
           return ProTableRequestAdapter(params, sort, filter, QueryStaffsList);
