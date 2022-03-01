@@ -11,7 +11,7 @@ import type { StaffParam } from '@/pages/StaffAdmin/ContactWay/data';
 import type { SimpleStaffInterface } from '@/services/staff';
 import type { DataNode } from 'rc-tree/lib/interface';
 import { RoleColorMap, RoleMap } from '../../../../../../config/constant';
-
+import { QueryDepartmentByExtID } from '@/services/department';
 export interface StaffOption extends SimpleStaffInterface {
   key: any;
   label: string;
@@ -21,6 +21,8 @@ export interface StaffOption extends SimpleStaffInterface {
 
 export interface TreeNode {
   type: 'node' | 'group';
+  parentId: number;
+  departmentId: number;
   title: string;
   key: string;
   parentKey: string;
@@ -50,6 +52,8 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
     staff?.departments?.forEach((department) => {
       nodes.push({
         type: 'node',
+        parentId: department.ext_parent_id,
+        departmentId: department.ext_id,
         title: staff?.name,
         key: `node${separator}${department.ext_id}${separator}${staff?.ext_id}`,
         parentKey: `group${separator}${department.ext_id}`,
@@ -61,6 +65,8 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
       });
       nodes.push({
         type: 'group',
+        parentId: department.ext_parent_id,
+        departmentId: department.ext_id,
         title: department.name,
         key: `group${separator}${department.ext_parent_id}${separator}${department.ext_id}`,
         parentKey: `group${separator}${department.ext_parent_id}`,
@@ -86,19 +92,45 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
 
   const nodesByNodeKey = _.keyBy(nodes, 'nodeKey'); // 去重
   nodes = _.toArray<TreeNode>(nodesByNodeKey); // 设置一维节点
-
   const groupedNodes = _.groupBy(nodesByNodeKey, 'parentKey');
-  // 组装node
-  _.each(_.omit(groupedNodes, `group${separator}0`), (children, parentKey) => {
-    nodesByNodeKey[parentKey].children = children;
-  });
 
+  // 组装node
+  _.each(_.omit(groupedNodes, `group${separator}0`), async (children,parentKey) => {
+    // 如果部门员工为空，但拥有下级部门，且下级部门有员工
+    if (nodesByNodeKey[parentKey]===undefined) {
+      if (children.length>0) {
+        // 请求该部门信息
+        await QueryDepartmentByExtID(children[0].parentId.toString()).then((resp)=>{
+          nodesByNodeKey[parentKey] = {
+            type: 'group',
+            parentId: resp.data.ext_parent_id,
+            departmentId: resp.data.ext_id,
+            title: resp.data.name,
+            key: `group${separator}${resp.data.ext_parent_id}${separator}${resp.data.ext_id}`,
+            parentKey: `group${separator}${resp.data.ext_parent_id}`,
+            nodeKey: `group${separator}${resp.data.ext_id}`,
+            children: [],
+            isLeaf: true,
+            checkable: true,
+            selectable: false,
+          }
+          nodesByNodeKey[parentKey].children = children;
+          // 追加到父级部门
+          nodesByNodeKey[nodesByNodeKey[parentKey].parentKey].children.push(nodesByNodeKey[parentKey]);
+          nodes.push(nodesByNodeKey[parentKey]);
+        });
+      }
+    } else {
+      // 部门员工不为0
+      nodesByNodeKey[parentKey].children = children;
+    }
+    
+  });
   tree = _.toArray<TreeNode>(nodesByNodeKey);
   // 清除顶层的冗余node
   tree = tree.filter((item) => {
     return item.parentKey === `group${separator}0`;
   });
-
   return {
     nodes,
     tree,
