@@ -12,7 +12,7 @@ type QueryStaffsParams = Partial<{
   type: string;
 }> & {
   enable_msg_arch: number;
-  ext_department_id: number | number[];
+  ext_department_ids: number | number[];
 }
 
 type QueryDepartmentParams = Partial<{

@@ -3,7 +3,7 @@ import request from '@/utils/request';
 import { StaffAdminApiPrefix } from '../../../../config/constant';
 
 type QueryStaffsParams = Partial<{
-  ext_department_id: number;
+  ext_department_ids: number;
   name: string;
   page: number;
   page_size: number;
