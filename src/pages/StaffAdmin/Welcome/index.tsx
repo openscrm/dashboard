@@ -452,7 +452,7 @@ const Welcome: React.FC<WelcomeProps> = (props) => {
               <ProCard title={'入门指引'} bordered={true} style={{marginTop: 8}} bodyStyle={{paddingTop: 10}}>
                 <div className={styles.guideContainer}>
                   <div className={styles.item}>
-                    文档中心 <Button size={'small'} target={'_blank'} href={'https://docs.openscrm.cn/'}
+                    文档中心 <Button size={'small'} target={'_blank'} href={'https://github.com/openscrm/api-server/wiki'}
                                  type={'dashed'}>查看</Button>
                   </div>
                 </div>
