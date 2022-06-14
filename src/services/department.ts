@@ -18,7 +18,7 @@ export interface DepartmentInterface {
 }
 
 // QueryDepartment 查询部门
-export async function QueryDepartment(params: CommonQueryParams) {
+export async function QueryDepartment(params: CommonQueryParams & { ext_dept_ids?: number[]; ext_parent_id?: string;}) {
   return request(`${StaffAdminApiPrefix}/departments`, {
     params,
   });

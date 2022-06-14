@@ -11,7 +11,8 @@ import type { StaffParam } from '@/pages/StaffAdmin/ContactWay/data';
 import type { SimpleStaffInterface } from '@/services/staff';
 import type { DataNode } from 'rc-tree/lib/interface';
 import { RoleColorMap, RoleMap } from '../../../../../../config/constant';
-import { QueryDepartmentByExtID } from '@/services/department';
+import { QueryDepartment } from '@/services/department';
+
 export interface StaffOption extends SimpleStaffInterface {
   key: any;
   label: string;
@@ -100,7 +101,7 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
     if (nodesByNodeKey[parentKey]===undefined) {
       if (children.length>0) {
         // 请求该部门信息
-        await QueryDepartmentByExtID(children[0].parentId.toString()).then((resp)=>{
+        await QueryDepartment({ext_parent_id: children[0].parentId.toString()}).then((resp: { data: { ext_parent_id: any; ext_id: any; name: any; }; })=>{
           nodesByNodeKey[parentKey] = {
             type: 'group',
             parentId: resp.data.ext_parent_id,
@@ -124,7 +125,7 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
       // 部门员工不为0
       nodesByNodeKey[parentKey].children = children;
     }
-    
+
   });
   tree = _.toArray<TreeNode>(nodesByNodeKey);
   // 清除顶层的冗余node
