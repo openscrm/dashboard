@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLoadMore} from '@umijs/hooks';
 import type {FnParams} from '@umijs/hooks/es/useLoadMore';
 import styles from './index.less'
-import {Input, message, Tabs, Spin, Empty, Form, DatePicker, Row, Image} from 'antd'
+import {DatePicker, Empty, Form, Image, Input, message, Row, Spin, Tabs, Typography} from 'antd'
 import {
-  QueryStaffsList,
+  QueryChatMessages,
   QueryChatSessions,
   QueryDepartmentList,
-  QueryChatMessages,
+  QueryStaffsList,
   SearchMessages,
 } from "@/pages/StaffAdmin/ChatSession/service";
 import DepartmentTreeSelect from "@/pages/StaffAdmin/Components/Fields/DepartmentTreeSelect";
@@ -274,7 +274,12 @@ const StaffSession: React.FC = (props: any) => {
 
     return (
       <>
-        <PageContainer/>
+        <PageContainer
+          header={{
+            title: '消息存档',
+            subTitle: <Typography.Text>会话存档为独立服务，请单独部署 https://github.com/openscrm/msg-server</Typography.Text>
+          }}
+        />
         <div className={styles.staffSession}>
           {/* 员工列表 */}
           <div className={styles.staffListAside}>
