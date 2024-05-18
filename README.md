@@ -13,11 +13,8 @@
 
 > 此项目为OpenSCRM管理后台前端项目
 
-### 在线演示
-
-http://dashboard.demo.openscrm.cn:8000/
-
 ### 如何安装
+- node版本要求：node == 16.20.2
 - 修改config/proxy.ts，将后端接口地址修改为你的后端服务地址，如：http://127.0.0.1:8080/
 ```shell
   dev: { #开发环境

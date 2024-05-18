@@ -51,7 +51,7 @@ export default defineConfig({
     "@ant-design/charts": "charts"
   },
   devServer: {
-    host: 'dashboard.dev.openscrm.cn',
+    host: 'localhost',
     port: 9000,
   },
 });

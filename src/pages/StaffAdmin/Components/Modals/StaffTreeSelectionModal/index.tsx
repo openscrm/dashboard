@@ -116,9 +116,10 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
             selectable: false,
           }
           nodesByNodeKey[parentKey].children = children;
-          // 追加到父级部门
-          nodesByNodeKey[nodesByNodeKey[parentKey].parentKey].children.push(nodesByNodeKey[parentKey]);
-          nodes.push(nodesByNodeKey[parentKey]);
+          // TODO 报错，暂时注释
+          // // 追加到父级部门
+          // nodesByNodeKey[nodesByNodeKey[parentKey].parentKey].children.push(nodesByNodeKey[parentKey]);
+          // nodes.push(nodesByNodeKey[parentKey]);
         });
       }
     } else {

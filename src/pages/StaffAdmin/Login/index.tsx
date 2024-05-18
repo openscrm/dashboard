@@ -47,8 +47,10 @@ const QrcodeLogin: React.FC = () => {
 
 
     // 演示环境使用调试登录，不用扫码登录
-    if (window.location.href.includes("dashboard.demo.openscrm.cn")) {
-      message.info("演示环境无需扫码登录，3秒后自动登录", 3000);
+    if (window.location.href.includes("demo") ||
+      window.location.href.includes("localhost") ||
+      window.location.href.includes("127.0.0.1")) {
+      message.info("开发演示环境无需扫码登录，3秒后自动登录", 3000);
       setTimeout(() => {
         StaffAdminForceLogin().then((res: CommonResp) => {
           if (res.code !== 0) {
@@ -56,7 +58,7 @@ const QrcodeLogin: React.FC = () => {
             return;
           }
 
-          window.location.href = "http://dashboard.demo.openscrm.cn:8000/staff-admin/welcome";
+          window.location.href = "/staff-admin/welcome";
         }).catch((err) => {
           message.error("自动登录失败")
           console.log("err", err)
