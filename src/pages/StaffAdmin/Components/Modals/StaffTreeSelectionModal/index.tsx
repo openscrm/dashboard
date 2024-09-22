@@ -101,25 +101,25 @@ const buildStaffTree = (items: SimpleStaffInterface[]): { nodes: TreeNode[]; tre
     if (nodesByNodeKey[parentKey]===undefined) {
       if (children.length>0) {
         // 请求该部门信息
-        await QueryDepartment({ext_parent_id: children[0].parentId.toString()}).then((resp: { data: { ext_parent_id: any; ext_id: any; name: any; }; })=>{
+        await QueryDepartment({ext_parent_id: children[0].parentId.toString()}).then((resp)=>{
+          const item = resp.data.items[0];
           nodesByNodeKey[parentKey] = {
             type: 'group',
-            parentId: resp.data.ext_parent_id,
-            departmentId: resp.data.ext_id,
-            title: resp.data.name,
-            key: `group${separator}${resp.data.ext_parent_id}${separator}${resp.data.ext_id}`,
-            parentKey: `group${separator}${resp.data.ext_parent_id}`,
-            nodeKey: `group${separator}${resp.data.ext_id}`,
+            parentId: item.ext_parent_id,
+            departmentId: item.ext_id,
+            title: item.name,
+            key: `group${separator}${item.ext_parent_id}${separator}${item.ext_id}`,
+            parentKey: `group${separator}${item.ext_parent_id}`,
+            nodeKey: `group${separator}${item.ext_id}`,
             children: [],
             isLeaf: true,
             checkable: true,
             selectable: false,
           }
           nodesByNodeKey[parentKey].children = children;
-          // TODO 报错，暂时注释
-          // // 追加到父级部门
-          // nodesByNodeKey[nodesByNodeKey[parentKey].parentKey].children.push(nodesByNodeKey[parentKey]);
-          // nodes.push(nodesByNodeKey[parentKey]);
+          // 追加到父级部门
+          nodesByNodeKey[nodesByNodeKey[parentKey].parentKey].children.push(nodesByNodeKey[parentKey]);
+          nodes.push(nodesByNodeKey[parentKey]);
         });
       }
     } else {
