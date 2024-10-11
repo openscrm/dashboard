@@ -26,17 +26,17 @@
   },
 ```
 
-- 安装tyarn，安装tyarn是淘宝加速过的yarn
+- 国内npm源加速（可选）
 ```shell
-npm -g install tyarn
+npm config set registry https://registry.npmmirror.com
 ```
 
 - 安装项目依赖
 ```shell
-tyarn install
+npm install
 ```
 
-- 修改配置文件
+- 修改配置文件（可选）
 ```shell
 config/config.ts
 ```
@@ -44,7 +44,7 @@ config/config.ts
 
 - 启动开发环境
 ```shell
-tyarn start
+npm run start
 ```
 
 此前端项目是基于Antd Pro的，备查文档：https://pro.ant.design/zh-CN/docs/overview
