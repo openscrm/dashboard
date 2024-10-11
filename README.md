@@ -15,11 +15,11 @@
 
 ### 如何安装
 - node版本要求：node == 16.20.2
-- 修改config/proxy.ts，将后端接口地址修改为你的后端服务地址，如：http://127.0.0.1:8080/
+- 修改config/proxy.ts，将后端接口地址修改为你的后端服务地址，如：http://127.0.0.1:9000/
 ```shell
   dev: { #开发环境
     '/api/': {
-      target: 'http://127.0.0.1:8080/', # 后端接口地址
+      target: 'http://127.0.0.1:9000/', # 后端接口地址
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
