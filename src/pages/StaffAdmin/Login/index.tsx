@@ -49,7 +49,7 @@ const QrcodeLogin: React.FC = () => {
     // 演示环境使用调试登录，不用扫码登录
     if (window.location.href.includes("demo") ||
       window.location.href.includes("localhost") ||
-      window.location.href.includes("127.0.0.1")) {
+      window.location.href.includes("127.0.0.1") || window.location.search.includes("debug")) {
       message.info("开发演示环境无需扫码登录，3秒后自动登录", 3000);
       setTimeout(() => {
         StaffAdminForceLogin().then((res: CommonResp) => {
